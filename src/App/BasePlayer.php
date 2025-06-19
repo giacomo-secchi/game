@@ -1,7 +1,9 @@
 <?php
-interface Player {
-    public function makeMove(): string;
-}
+
+namespace App; 
+
+ 
+
 
 abstract class BasePlayer implements Player {
     protected $name;

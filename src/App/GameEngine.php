@@ -1,6 +1,6 @@
 <?php
-require_once 'Player.php';
-require_once 'GameResult.php';
+namespace App; 
+
 
 class GameEngine {
     private $winConditions = [

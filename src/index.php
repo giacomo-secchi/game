@@ -1,8 +1,15 @@
 <?php
-require_once 'GameEngine.php';
-require_once 'HumanPlayer.php';
-require_once 'ComputerPlayer.php';
-require_once 'GameResult.php';
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require __DIR__ . '/config/config.php';
+
+require_once __DIR__ . '/bootstrap.php';
+
+
+
 
 // Configurazione
 $moves = ['carta', 'forbice', 'sasso'];
@@ -21,17 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Seleziona una mossa!");
             }
             
-            $player1 = new HumanPlayer('Tu');
+            $player1 = new App\HumanPlayer('Tu');
             $player1->setMove($humanMove);
-            $player2 = new ComputerPlayer('Computer');
+            $player2 = new App\ComputerPlayer('Computer');
         } 
         // Computer vs Computer
         else {
-            $player1 = new ComputerPlayer('Computer 1');
-            $player2 = new ComputerPlayer('Computer 2');
+            $player1 = new App\ComputerPlayer('Computer 1');
+            $player2 = new App\ComputerPlayer('Computer 2');
         }
         
-        $game = new GameEngine();
+        $game = new App\GameEngine();
         $result = $game->play($player1, $player2);
         
     } catch (Exception $e) {

@@ -1,5 +1,5 @@
 <?php
-require_once 'Player.php';
+namespace App; 
 
 class ComputerPlayer extends BasePlayer {
     public function makeMove(): string {

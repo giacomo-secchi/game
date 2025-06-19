@@ -1,5 +1,7 @@
 <?php
-require_once 'Player.php';
+ 
+namespace App; 
+use App\BasePlayer;
 
 class HumanPlayer extends BasePlayer {
     private $move;
