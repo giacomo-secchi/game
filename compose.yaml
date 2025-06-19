@@ -15,4 +15,4 @@ services:
       - 9000:80
     volumes:
       - ./src:/var/www/html
-
+      - ./public:/var/www/html/public

@@ -1,7 +1,7 @@
 <?php
  
-namespace App; 
-use App\BasePlayer;
+namespace App\Models;
+use App\Models\BasePlayer;
 
 class HumanPlayer extends BasePlayer {
     private $move;

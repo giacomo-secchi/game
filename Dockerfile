@@ -66,14 +66,30 @@ FROM php:8.2-apache as final
 #    && pecl install xdebug-3.2.1 \
 #    && docker-php-ext-enable redis xdebug
 
+# Abilita il modulo rewrite di Apache per gestire il routing
+RUN a2enmod rewrite
+
+# Configura il document root di Apache per puntare alla cartella public
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+
+# Modifica la configurazione di Apache
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+
 # Use the default production configuration for PHP runtime arguments, see
 # https://github.com/docker-library/docs/tree/master/php#configuration
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+# RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 # Copy the app dependencies from the previous install stage.
 COPY --from=deps app/vendor/ /var/www/html/vendor
 # Copy the app files from the app directory.
 COPY ./src /var/www/html
+COPY ./public /var/www/html/public
+
+
+# Cambia i permessi della cartella public
+RUN chown -R www-data:www-data /var/www/html/public
 
 # Switch to a non-privileged user (defined in the base image) that the app will run under.
 # See https://docs.docker.com/go/dockerfile-user-best-practices/

@@ -1,5 +1,5 @@
 <?php
-namespace App; 
+namespace App\Models;
 
 class GameResult {
     private $player1Move;
