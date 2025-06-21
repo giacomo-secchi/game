@@ -14,5 +14,17 @@ services:
     ports:
       - 9000:80
     volumes:
+      - ./tests:/var/www/html/tests
       - ./src:/var/www/html
       - ./public:/var/www/html/public
+  tests:
+    profiles: ["tests"]
+    build:
+      context: .
+      target: final
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    command: php /usr/local/bin/phpunit ./tests/
+    depends_on:
+      - server
