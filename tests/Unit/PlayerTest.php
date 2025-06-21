@@ -1,17 +1,17 @@
 <?php
 namespace Tests\Unit;
 
-require_once __DIR__ . '/../../src/bootstrap.php';
 
-
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use App\Models\HumanPlayer;
 use App\Models\ComputerPlayer;
 
+#[CoversClass(PlayerTest::class)]
 class PlayerTest extends TestCase
-
 {
-    /** @test */
+    #[CoversMethod(GameResult::class, '__construct')]
+    #[CoversMethod(GameResult::class, 'makeMove')]
     public function testHumanPlayerMove()
     {
         $player = new HumanPlayer('Test Player');
@@ -20,7 +20,9 @@ class PlayerTest extends TestCase
         $this->assertSame('forbice', $player->makeMove());
     }
 
-    /** @test */
+    
+    #[CoversMethod(GameResult::class, '__construct')]
+    #[CoversMethod(GameResult::class, 'makeMove')]
     public function testComputerPlayerMove()
     {
         $player = new ComputerPlayer('AI');

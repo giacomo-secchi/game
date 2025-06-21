@@ -33,6 +33,16 @@ class GameController
                 }
                 
                 $result = $gameEngine->play($player1, $player2);
+
+                $output = sprintf(
+                    "\n%s: %s vs %s: %s\n",
+                    $player1->getName(),
+                    $result->getPlayer1Move(),
+                    $player2->getName(),
+                    $result->getPlayer2Move()
+                );
+                
+                echo $output; 
             } catch (\Exception $e) {
                 $error = $e->getMessage();
             }

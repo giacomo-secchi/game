@@ -13,7 +13,6 @@ class GameEngine {
         $move1 = $player1->makeMove();
         $move2 = $player2->makeMove();
         
-        echo "\n{$player1->getName()}: $move1 vs {$player2->getName()}: $move2\n";
         
         if ($move1 === $move2) {
             return new GameResult($move1, $move2, null);

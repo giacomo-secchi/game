@@ -1,11 +1,17 @@
 <?php
-require_once __DIR__ . '/../../src/bootstrap.php';
 
+namespace Tests\Unit;
+
+
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
 use App\Models\GameEngine;
 use App\Models\HumanPlayer;
 use App\Models\ComputerPlayer;
 
-class GameTest extends PHPUnit\Framework\TestCase
+
+#[CoversClass(Game::class)]
+class GameTest extends TestCase
 {
     private $gameEngine;
 
@@ -14,7 +20,9 @@ class GameTest extends PHPUnit\Framework\TestCase
         $this->gameEngine = new GameEngine();
     }
 
-    /** @test */
+    #[CoversMethod(GameResult::class, '__construct')]
+    #[CoversMethod(GameResult::class, 'play')]
+    #[CoversMethod(GameResult::class, 'getWinner')]
     public function testWinGameLogic()
     {
         // Mock dei giocatori
@@ -36,7 +44,8 @@ class GameTest extends PHPUnit\Framework\TestCase
     }
 
     
-    /** @test */
+    #[CoversMethod(GameResult::class, 'play')]
+    #[CoversMethod(GameResult::class, 'isDraw')]
     public function testDrawGameLogic()
     {
         $player1 = $this->createMock(HumanPlayer::class);
@@ -49,8 +58,5 @@ class GameTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($result->isDraw());
     }
 }
-
-
-
 
 

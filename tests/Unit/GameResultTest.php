@@ -1,20 +1,18 @@
 <?php
 namespace Tests\Unit;
 
-
-require_once __DIR__ . '/../../src/bootstrap.php';
-
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use App\Models\GameEngine;
-use App\Models\HumanPlayer;
-use App\Models\ComputerPlayer;
 use App\Models\GameResult;
+use App\Models\HumanPlayer;
 
+#[CoversClass(GameResult::class)]
 class GameResultTest extends TestCase
 {
- 
-
-   /** @test */
+    #[CoversMethod(GameResult::class, '__construct')]
+    #[CoversMethod(GameResult::class, 'getPlayer1Move')]
+    #[CoversMethod(GameResult::class, 'getPlayer2Move')]
+    #[CoversMethod(GameResult::class, 'getWinner')]
     public function testGameMoves()
     {
         $player = new HumanPlayer('Test');
@@ -24,11 +22,4 @@ class GameResultTest extends TestCase
         $this->assertSame('sasso', $result->getPlayer2Move());
         $this->assertSame($player, $result->getWinner());
     }
-    
-
 }
-
-
-
-
-
