@@ -11,4 +11,3 @@ A classic game implementation using PHP MVC architecture.
 ### With Docker (Recommended)
 **Follow the complete Docker setup guide:**  
 📄 [Docker Installation Guide](./README.Docker.md)
-
